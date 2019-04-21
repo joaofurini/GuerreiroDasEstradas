@@ -1,4 +1,5 @@
 from random import randint
+import time 
 class Motorista:
 
 	def __init__(self, nome, habilidade, energia, sorte):
@@ -7,11 +8,7 @@ class Motorista:
 		self.__energia = energia
 		self.__sorte = sorte
 		self.__kitMedico  = 1
-
-		self.__sorteInicial = sorte
-		self.__energiaInicial = energia
-		self.__habilidadeInicial = habilidade
-		self.__creditos = 200
+		self.__dinheiro = 200
 
 	
 	#Metodos get 
@@ -58,15 +55,18 @@ class Motorista:
 	def setKit(self, value):
 		self.__kitMedico = value
 
-	def setCreditos(self, value):
-		self.__creditos = value
+	def setDinheiro(self, value):
+		self.__dinheiro = value
 
 	#METHODS
 	def mostraEstado(self):
-		print("\nOlá "+ self.__nome+ "  mente voce se encontra no seuginte estado:")
+		print("\n________________________________________________________________________")
+		print("\nATUALMENTE VOCE SE ENCONTRA NO SEGUINTA ESTADO:")
 		print("________________________________________________________________________")
-		return "Energia: "+str(self.__energia )+"\nHabilidade: "+ str(self.__habilidade )+ \
-		"\nSorte: "+ str(self.__sorte )+"\nPossui "+str(self.__kitMedico )+ " Kit Medico" +"\n_____________________________________________________"
+		print ("\nENERGIA: "+str(self.__energia )+"\nHABILIDADE: "+ str(self.__habilidade )+ \
+		"\nSORTE: "+ str(self.__sorte )+"\nPOSSUI "+str(self.__kitMedico )+ " KIT MEDICO" +\
+		"\nDINHEIRO: " + str(self.__dinheiro) +\
+		"\n________________________________________________________________________")
 
 
 	def perdeuRound(self):
@@ -85,5 +85,19 @@ class Motorista:
 			return True
 		self.__sorte  -= 1
 
+	def criaPlayer(self):
+		rolldice= "\nROLANDO DADOS..."
+		print(rolldice)
+		time.sleep(1.6)
+		print("\nENERGIA INICIAL: "+ str(self.__energia))
+		time.sleep(1)
+		print(rolldice)
+		time.sleep(1.6)
+		print("\nHABILIDADE INICIAL: " + str(self.__habilidade))
+		time.sleep(1)
+		print(rolldice)
+		time.sleep(1.6)
+		print("\nSORTE INICIAL: "+ str(self.__sorte))
+		time.sleep(1)
 
 
