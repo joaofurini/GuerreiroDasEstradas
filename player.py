@@ -2,11 +2,11 @@ from random import randint
 import time 
 class Motorista:
 
-	def __init__(self, nome, habilidade, energia, sorte):
+	def __init__(self, nome):
 		self.__nome = nome
-		self.__habilidade = habilidade
-		self.__energia = energia
-		self.__sorte = sorte
+		self.__habilidade =  6 + randint(0,6)
+		self.__energia = 24 + (randint(0,6) + randint(0,6))
+		self.__sorte =  6 + randint(0,6)
 		self.__kitMedico  = 1
 		self.__dinheiro = 200
 

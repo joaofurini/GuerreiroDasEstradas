@@ -1,9 +1,9 @@
 from random import randint
 import time
 class CarroMonstro:
-	def __init__(self, poderDeFogo, blindagem):
-		self.__poderDeFogo = poderDeFogo
-		self.__blindagem = blindagem
+	def __init__(self):
+		self.__poderDeFogo = 6 + randint(0,6)
+		self.__blindagem = 24 + (randint(0,6) + randint(0,6))
 		self.__combustivel = 100
 		self.__misseis = 4
 		self.__acessorios = []
