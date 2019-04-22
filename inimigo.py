@@ -1,3 +1,5 @@
+from random import randint
+import time
 class Inimigo:
 	def __init__(self, habilidade, energia):
 		self.__habilidade = habilidade
@@ -12,9 +14,30 @@ class Inimigo:
 
 	def setEnergia(self, value):
 		self.__energia = value
-		
+
 	def perdeuRound(self):
 		self.__energia -=1
 		return self.__energia
+
+	def mostraEstado(self):
+		print("ENERGIA Inimigo: {}".format(self.__energia))
+
+	def tomaTiro(self):
+		danoTiro = randint(0, 6)
+		if danoTiro == 0:
+			print("Voce teria acertado se o inimigo nao tivesse desviado de ultima hora ")
+			print("Voce tirou {} de dano".format(danoTiro))
+			time.sleep(1.5)
+
+		elif danoTiro == 6:
+			self.__energia =0
+			print("Voce acertou um tiro na cabeca do inimigo e ele esta morto")
+		else:
+			self.__energia -= danoTiro
+			print("\nVOCE ACERTOU UM TIRO")
+			print("e tirou {} de energia do inimigo".format(danoTiro))
+
+
+
 
 

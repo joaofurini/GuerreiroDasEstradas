@@ -55,8 +55,8 @@ class Motorista:
 	def setKit(self, value):
 		self.__kitMedico = value
 
-	def setDinheiro(self, value):
-		self.__dinheiro = value
+	def gastaDinheiro(self, value):
+		self.__dinheiro -= value
 
 	#METHODS
 	def mostraEstado(self):
@@ -71,7 +71,7 @@ class Motorista:
 
 	def perdeuRound(self):
 		self.__energia  -=1
-		return self.__energia 
+		
 
 	def usaKit(self):
 		self.__energia  +=4
@@ -99,5 +99,25 @@ class Motorista:
 		time.sleep(1.6)
 		print("\nSORTE INICIAL: "+ str(self.__sorte))
 		time.sleep(1)
+
+
+	def tomaTiro(self):
+		danoTiro = randint(0, 6)
+		dice = randint(0,6)
+
+		if danoTiro == 0:
+			print("O inimigo teria acertado se voce nao tivesse desviado de ultima hora ")
+			print("Voce tomou {} de dano".format(danoTiro))
+			time.sleep(1.5)
+		elif danoTiro == 6 and dice <=5:
+			self.__energia =0
+			print("O inimigo em um movimento inesperado te deu um tiro na cabeca")
+			time.sleep(1.5)
+		else:
+			self.__energia -= danoTiro
+			print("\nVOCE TOMOU UM TIRO")
+			print("e perdeu {} de energia".format(danoTiro) )
+			time.sleep(1.5)
+
 
 
