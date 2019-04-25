@@ -9,7 +9,14 @@ class Motorista:
 		self.__sorte =  6 + randint(0,6)
 		self.__kitMedico  = 1
 		self.__dinheiro = 200
-
+		self.__player= {
+			"Habilidade": self.__habilidade,
+			"Energia": self.__energia,
+			"Sorte": self.__sorte,
+			"KitMedico": self.__kitMedico,
+			"Dinheiro": self.__dinheiro
+		}
+		
 	
 	#Metodos get 
 	def getNome(self):
@@ -60,14 +67,10 @@ class Motorista:
 
 	#METHODS
 	def mostraEstado(self):
-		print("\n________________________________________________________________________")
-		print("\nATUALMENTE VOCE SE ENCONTRA NO SEGUINTA ESTADO:")
-		print("________________________________________________________________________")
-		print ("\nENERGIA: "+str(self.__energia )+"\nHABILIDADE: "+ str(self.__habilidade )+ \
-		"\nSORTE: "+ str(self.__sorte )+"\nPOSSUI "+str(self.__kitMedico )+ " KIT MEDICO" +\
-		"\nDINHEIRO: " + str(self.__dinheiro) +\
-		"\n________________________________________________________________________")
+		print("Atualmente voce esta no seguinte estado")
 
+		for key, value in self.__player.items():
+			print('{} - {}'.format(key, value))
 
 	def perdeuRound(self):
 		self.__energia  -=1
@@ -86,20 +89,30 @@ class Motorista:
 		self.__sorte  -= 1
 
 	def criaPlayer(self):
-		rolldice= "\nROLANDO DADOS..."
-		print(rolldice)
-		time.sleep(1.6)
-		print("\nENERGIA INICIAL: "+ str(self.__energia))
-		time.sleep(1)
-		print(rolldice)
-		time.sleep(1.6)
-		print("\nHABILIDADE INICIAL: " + str(self.__habilidade))
-		time.sleep(1)
-		print(rolldice)
-		time.sleep(1.6)
-		print("\nSORTE INICIAL: "+ str(self.__sorte))
-		time.sleep(1)
+		rolldice = "\nROLANDO DADOS..."
+		for key, value in self.__player.items():
+			print(rolldice)
+			time.sleep(1.6)
+			print('\n{} Inicial: {}'.format(key, value))
+			time.sleep(1)
+			
+			
 
+
+		'''rolldice= "\nROLANDO DADOS..."
+								print(rolldice)
+								time.sleep(1.6)
+								print("\nENERGIA INICIAL: "+ str(self.__energia))
+								time.sleep(1)
+								print(rolldice)
+								time.sleep(1.6)
+								print("\nHABILIDADE INICIAL: " + str(self.__habilidade))
+								time.sleep(1)
+								print(rolldice)
+								time.sleep(1.6)
+								print("\nSORTE INICIAL: "+ str(self.__sorte))
+								time.sleep(1)
+						'''
 
 	def tomaTiro(self):
 		danoTiro = randint(0, 6)

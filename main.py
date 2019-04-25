@@ -15,7 +15,7 @@ print(caimpaing.introducao())
 nome = input("\nDigite o seu nome: ")
 player = Motorista(nome)
 player.criaPlayer()
-player.mostraEstado()
+#player.mostraEstado()
 #CRIACAO DO CARRO DO JOGADOR 
 carro = CarroMonstro()
 carro.mostraEstado()
