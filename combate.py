@@ -1,6 +1,8 @@
 from random import randint 
 import time
 
+#CRIAR A CHEGAGEM PARA O LANCAMENTO DE MISSEIS
+
 class Batalha:
 	def corpoACorpo(player, inimigo):
 		rolldice = "\nROLANDO OS DADOS..."
@@ -76,7 +78,7 @@ class Batalha:
 
 		while ((carro.getBlindagem()!=0) and (carroInimigo.getBlindagem()!= 0)) and missel == False:
 			if carro.getMisseis() > 0:
-				lancarMissel = input("Deseja lancar um missel? s/n")
+				lancarMissel = input("\nDeseja lancar um missel? s/n")
 				if carro.getMisseis()>0 and lancarMissel == 's':
 					print("Voce explodiu o inimigo")
 					carro.lancaMissel()
@@ -96,15 +98,19 @@ class Batalha:
 			
 			if forcaAtaqueInimigo > forcaAtaquePlayer:
 				carro.tomaTiro()
+			
+				print("\n=========================")
+				print("Sua blindagem atual: {}".format(carro.getBlindagem()))
+				print("blindagem do inimigo: {}".format(carroInimigo.getBlindagem()))
+				print("=========================")
 				time.sleep(1.5)
-				print("___________________________________________________________________")
-				print("\nA sua blidnagem atual: {}".format(carro.getBlindagem()))
-				print("\nblindagem do inimigo: {}".format(carroInimigo.getBlindagem()))
 					
 			elif forcaAtaquePlayer > forcaAtaqueInimigo:
 				carroInimigo.tomaTiro()
-				print("\nA sua blidnagem atual: {}".format(carro.getBlindagem()))
-				print("\nblindagem do inimigo: {}".format(carroInimigo.getBlindagem()))
+				print("\n=========================")
+				print("Sua blindagem atual: {}".format(carro.getBlindagem()))
+				print("blindagem do inimigo: {}".format(carroInimigo.getBlindagem()))
+				print("===========================")
 				time.sleep(1.5)
 
 			elif forcaAtaquePlayer == forcaAtaqueInimigo:

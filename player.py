@@ -3,90 +3,95 @@ import time
 class Motorista:
 
 	def __init__(self, nome):
-		self.__nome = nome
-		self.__habilidade =  6 + randint(0,6)
-		self.__energia = 24 + (randint(0,6) + randint(0,6))
-		self.__sorte =  6 + randint(0,6)
-		self.__kitMedico  = 1
-		self.__dinheiro = 200
 		self.__player= {
-			"Habilidade": self.__habilidade,
-			"Energia": self.__energia,
-			"Sorte": self.__sorte,
-			"KitMedico": self.__kitMedico,
-			"Dinheiro": self.__dinheiro
+			"Nome": nome,
+			"Habilidade": 6 + randint(0,6),
+			"Energia":24 + (randint(0,6) + randint(0,6)),
+			"Sorte": 6 + randint(0,6),
+			"Kit Medico": 1,
+			"Dinheiro": 200
 		}
 		
-	
+		self.__habilidadeInicial = self.__player['Habilidade']
+		self.__energiaInicial = self.__player['Energia']
+		self.__sorteInicial = self.__player['Sorte']
+		
 	#Metodos get 
 	def getNome(self):
-		return self.__nome
+		return self.__player['Nome']
 
 	def getHabilidade(self):
-		return self.__habilidade
+		return self.__player['Habilidade']
 
 	def getEnergia(self):
-		return self.__energia
+		return self.__player['Energia']
 
 	def getSorte(self):
-		return self.__energia 
+		return self.__player['Sorte']
 
 	def getKit(self):
-		return self.__sorte
+		return self.__player['Kit Medico']
 
 	def getCreditos(self):
-		return self.__creditos
+		return self.__player['Dinheiro']
 
 		#SETTERS
 	def setHabilidade(self, value):
-		habilidadeInicial = self.__habilidadeInicial
+
 		if value <= self.__habilidadeInicial:
-			self.__habilidade = value
+			self.__player['Habilidade'] = value
 		else:
-			self.__habilidade = habilidadeInicial
+			self.__player['Habilidade'] = self.__habilidadeInicial
 
 	def setEnergia(self, value):
-		energiaInicial = self.__energiaInicial
+
 		if value <= self.__energiaInicial:
-			self.__energia = value
+			self.__player['Energia'] = value
 		else:
-			self.__energia = energiaInicial
-		
+			self.__player['Energia'] = self.__energiaInicial
+
 	def setSorte(self, value):
-		sorteInicial = self.__sorteInicial
-		if value <= self.__sorte :
-			self.__sorte = value
-		else: 
-			self.__sorte = sorteInicial 
-		
-	def setKit(self, value):
-		self.__kitMedico = value
+
+		if value <= self.__sorteInicial:
+			self.__player['Sorte'] = value
+		else:
+			self.__player['Sorte'] = self.__sorteInicial
+
+	def ganhaKit(self, value):
+		self.__player['Kit Medico'] += value
+
+	def perdeKit(self, value):
+		self.__player['Kit Medico'] -= value
 
 	def gastaDinheiro(self, value):
-		self.__dinheiro -= value
+		self.__player['Dinheiro'] -= value
+
+	def gastaDinheiro(self, value):
+		self.__player['Dinheiro'] += value
 
 	#METHODS
 	def mostraEstado(self):
-		print("Atualmente voce esta no seguinte estado")
-
+		print("\n==========================================================")
+		print("ATUALMENTE VOCE SE ENCONTRA NO SEGUINTE ESTADO:")
 		for key, value in self.__player.items():
 			print('{} - {}'.format(key, value))
+		print("\n==========================================================")
 
 	def perdeuRound(self):
-		self.__energia  -=1
+		self.__player['Energia'] -=1
 		
 
 	def usaKit(self):
-		self.__energia  +=4
-		self.__kitMedico -=1 
+		self.__player['Energia']  +=4
+		self.__player['Kit Medico'] -=1 
 
 	def testYourLuck(self):
 		resutadoDados = randint(0,6) + randint(0,6)
-		if resultadoDados > self.__sorte :
+		if resultadoDados > self.__player['Sorte'] :
 			return False
 		else: 
 			return True
-		self.__sorte  -= 1
+		self.__player['Sorte']  -= 1
 
 	def criaPlayer(self):
 		rolldice = "\nROLANDO DADOS..."
@@ -96,23 +101,6 @@ class Motorista:
 			print('\n{} Inicial: {}'.format(key, value))
 			time.sleep(1)
 			
-			
-
-
-		'''rolldice= "\nROLANDO DADOS..."
-								print(rolldice)
-								time.sleep(1.6)
-								print("\nENERGIA INICIAL: "+ str(self.__energia))
-								time.sleep(1)
-								print(rolldice)
-								time.sleep(1.6)
-								print("\nHABILIDADE INICIAL: " + str(self.__habilidade))
-								time.sleep(1)
-								print(rolldice)
-								time.sleep(1.6)
-								print("\nSORTE INICIAL: "+ str(self.__sorte))
-								time.sleep(1)
-						'''
 
 	def tomaTiro(self):
 		danoTiro = randint(0, 6)
@@ -123,11 +111,11 @@ class Motorista:
 			print("Voce tomou {} de dano".format(danoTiro))
 			time.sleep(1.5)
 		elif danoTiro == 6 and dice <=5:
-			self.__energia =0
+			self.__player['Energia'] =0
 			print("O inimigo em um movimento inesperado te deu um tiro na cabeca")
 			time.sleep(1.5)
 		else:
-			self.__energia -= danoTiro
+			self.__player['Energia'] -= danoTiro
 			print("\nVOCE TOMOU UM TIRO")
 			print("e perdeu {} de energia".format(danoTiro) )
 			time.sleep(1.5)

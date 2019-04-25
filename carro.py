@@ -2,39 +2,44 @@ from random import randint
 import time
 class CarroMonstro:
 	def __init__(self):
-		self.__poderDeFogo = 6 + randint(0,6)
-		self.__blindagem = 24 + (randint(0,6) + randint(0,6))
-		self.__combustivel = 100
-		self.__misseis = 4
-		self.__acessorios = []
+
+		self.__carro = {
+			"Poder De Fogo": 6 + randint(0,6),
+			"Blindagem": 24 + (randint(0,6) + randint(0,6)),
+			"Combustivel": 100,
+			"Misseis": 4,
+			"Acessorios": [],
+		}
 
 		#METODOS DE ACESSO
 	def getPoderDeFogo(self):
-		return self.__poderDeFogo
+		return self.__carro['Poder De Fogo']
 
 	def getBlindagem(self):
-		return self.__blindagem
+		return self.__carro['Blindagem']
 
 	def getCombustivel(self):
-		return self.__combustivel
+		return self.__carro['Combustivel']
 
 	def getAcessorios(self):
-		return self.__acessorios
+		return self.__carro['Acessorios']
 
 	def getMisseis(self):
-		return self.__misseis
+		return self.__carro['Misseis']
 
 		#METODOS SETTERS
 	def mostraEstado(self):
-		print("\nSEU CARRO SE ENCONTRA NO SEGUINTE ESTADO: ")
-		print("Poder de fogo: "+str(self.__poderDeFogo)+ "\nBlindagem: "+str(self.__blindagem) +\
-				"\nMisses: "+ str(self.__misseis) + "\nAcessorios: "+ str(self.__acessorios))
+		print("\n==========================================================")
+		print("ATUALMENTE O SEU CARRO SE ENCONTRA NO SEGUITNE ESTADO: ")
+		for key, value in self.__carro.items():
+			print('{} - {}'.format(key, value ))
+		print("==========================================================")
 
 	def lancaMissel(self):
-		self.__misseis -=1
+		self.__carro['Misseis'] -=1
 
 	def setMisseis(self, value):
-		self.__misseis += value
+		self.__carro['Misseis'] += value
 
 
 	def tomaTiro(self):
@@ -44,7 +49,7 @@ class CarroMonstro:
 			print("Voce tomou {} de dano".format(danoTiro))
 			time.sleep(1.5)
 		else:
-			self.__blindagem -= danoTiro
+			self.__carro['Blindagem'] -= danoTiro
 			print("\nO INIMIGO ACERTOU TIROS NO SEU CARRO")
 			print("e tirou {} de sua blindagem".format(danoTiro) )
 			time.sleep(1.5)
