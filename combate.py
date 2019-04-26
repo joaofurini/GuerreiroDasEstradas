@@ -3,42 +3,76 @@ import time
 
 #CRIAR A CHEGAGEM PARA O LANCAMENTO DE MISSEIS
 
+def printBatalhaComDado(linhas):
+		"""
+			Padroniza output
+
+			:param linhas: Mensagens a serem exibidas
+			:type linhas: list
+		"""
+		print("___________________________________________________________________")
+		print("\nROLANDO OS DADOS...")
+		time.sleep(1)
+		for linha in linhas:
+			print(linha)
+		print("___________________________________________________________________")
+
+
 class Batalha:
-	def corpoACorpo(player, inimigo):
-		rolldice = "\nROLANDO OS DADOS..."
-		playerPerdido = 0
-		inimigoPerdido = 0
+	def __init__(self):
+		self.playerPerdido = 0
+
+
+
+	def estadoRound(self, player, inimigo):
+		"""
+			Calcula o vencedor da batalha
+
+			:param forcaAtaquePlayer: Ataque
+			:type forcaAtaquePlayer: list
+		"""
+		payload = []
+		forcaAtaqueInimigo = inimigo.getHabilidade() + (randint(0,6) + randint(0,6))
+		forcaAtaquePlayer = player.getHabilidade() + (randint(0,6) + randint(0,6))
+		if forcaAtaquePlayer > forcaAtaqueInimigo:
+			payload.append("VENCEU")
+		elif forcaAtaqueInimigo> forcaAtaquePlayer:
+			self.playerPerdido += 1
+			player.perdeuRound()
+			payload.append("PERDEU")
+		elif forcaAtaquePlayer == forcaAtaqueInimigo:
+			payload.append("EMPATOU")
+		payload.append([forcaAtaqueInimigo, forcaAtaquePlayer])
+		return payload
+
+	
+
+	def corpoACorpo(self, player, inimigo):
+		partidas = 0
+		estadoPartida = False
 		
-		while playerPerdido < 6 and inimigoPerdido < 6:
-			print("___________________________________________________________________")
-			print(rolldice) 
-			time.sleep(1)
-			forcaAtaqueInimigo = inimigo.getHabilidade() + (randint(0,6) + randint(0,6))
-			forcaAtaquePlayer = player.getHabilidade() + (randint(0,6) + randint(0,6))
-			print("\nATAQUE INIMIGO:{} ".format(forcaAtaqueInimigo))
-			print("\nSEU ATAQUE:{} ".format(forcaAtaquePlayer))
-			time.sleep(1)
-			print("___________________________________________________________________")
+		while True:
+			payload = self.estadoRound(player, inimigo)
+			if payload[0] != "EMPATOU":
+				partidas += 1
+			printBatalhaComDado(["\nATAQUE INIMIGO:{} ".format(payload[1][0]), \
+								 "\nSEU ATAQUE:{} ".format(payload[1][1])])
 
-			if forcaAtaquePlayer > forcaAtaqueInimigo:
-				inimigoPerdido += 1
-				print('\nVOCE VENCEU ESSE ROUND')
-			elif forcaAtaqueInimigo> forcaAtaquePlayer:
-				playerPerdido += 1
-				player.perdeuRound()
-				print('\nVOCE PERDEU ESSE ROUND')
-			elif forcaAtaquePlayer == forcaAtaqueInimigo:
-				print("\nVOCES EMPATARAM ESSE ROUND")
+			print("\n [ROUND {}] -> VOCE {}!!!".format(partidas, payload[0]))
 
-		if playerPerdido == 6:
-			print("\nVOCE PERDEU A LUTA")
-			return False
+			if partidas >= 6:
+				if self.playerPerdido >= 6:
+					print("\nVOCE PERDEU A LUTA")
+					break
+				elif partidas - self.playerPerdido  >= 6:
+					print("\nVOCE VENCEU A LUTA")
+					estadoPartida = True
+					break
+			
+		self.playerPerdido = 0
+		return estadoPartida
 
-		elif inimigoPerdido == 6:
-			print("\nVOCE VENCEU A LUTA")
-			return True
-
-	def bangBang(player, inimigo):
+	def bangBang(self, player, inimigo):
 
 		rolldice = "\nROLANDO OS DADOS..."
 		while (player.getEnergia()!=0) and (inimigo.getEnergia() != 0):
@@ -72,7 +106,7 @@ class Batalha:
 				print("___________________________________________________________________")
 				return True
 
-	def carBattle(carro, carroInimigo):
+	def carBattle(self, carro, carroInimigo):
 		missel =False
 		rolldice = "\nROLANDO DADOS"
 

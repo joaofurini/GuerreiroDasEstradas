@@ -11,9 +11,9 @@ from historia import *
 check = Checagem()
 caimpaing = Historia()
 
-decisao = check.checkDecisao(int(input("{}\n".format(caimpaing.Historia[1]))))
+#decisao = check.checkDecisao(int(input("{}\n".format(caimpaing.Historia[1]))))
 
-if decisao == 1:
+'''if decisao == 1:
 	decisao = check.checkDecisao(int(input("{}\n".format(caimpaing.Historia[126]))))
 	if decisao == 1:
 		print(caimpaing.Historia[274])
@@ -35,24 +35,35 @@ else:
 			decisao = check.checkDecisao(int(input(caimpaing.Historia[48])))
 	else:
 		print(caimpaing.Historia[188])
-	
+	'''
 
 #CRIACAO DO JOGADOR
 nome = input("\nDigite o seu nome: ")
 player = Motorista(nome)
 oponente = Inimigo(10, 10)
-
 carro = CarroMonstro()
 carroInimigo = CarroInimigo(10, 10)
 
-Batalha.carBattle(carro, carroInimigo)
-
-player.criaPlayer()
+'''Batalha.carBattle(carro, carroInimigo)'''
+#player.criaPlayer()
 player.mostraEstado()
 #CRIACAO DO CARRO DO JOGADOR 
 carro = CarroMonstro()
+carro.mostraEstado()
 
-'''carro.mostraEstado()'''
+oponente = Inimigo(10, 10)
+b1 = Batalha()
+
+
+'''b1.corpoACorpo(player, oponente)'''
+
+b1.corpoACorpo(player, oponente)
+
+player.mostraEstado()
+
+
+
+
 
 
 
